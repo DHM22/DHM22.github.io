@@ -1,4 +1,4 @@
-import { Brain, ChartColumn, Cloud, Lock, ShieldCheck } from 'lucide-react';
+import { Brain, ChartColumn, Lock, ShieldCheck } from 'lucide-react';
 import type { Certification } from '../types';
 
 /**
@@ -36,10 +36,5 @@ export const certifications: Certification[] = [
     detail: '40-hour intensive program',
     date: 'February 2025',
     icon: Lock,
-  },
-  {
-    name: 'AWS Cloud Practitioner',
-    issuer: 'Amazon Web Services',
-    icon: Cloud,
   },
 ];

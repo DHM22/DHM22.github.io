@@ -16,7 +16,7 @@ export function CertificationCard({ certification, delay = 0 }: { certification:
         <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
           {date ? <span className="font-mono text-fg-3">{date}</span> : <Pending>date</Pending>}
           {credentialId && <span className="font-mono text-fg-3">ID {credentialId}</span>}
-          {url ? (
+          {url && (
             <a
               href={url}
               {...externalLinkProps}
@@ -26,8 +26,6 @@ export function CertificationCard({ certification, delay = 0 }: { certification:
               View certificate
               <ArrowUpRight className="size-3.5" aria-hidden />
             </a>
-          ) : (
-            <Pending>certificate link</Pending>
           )}
         </div>
       </article>
