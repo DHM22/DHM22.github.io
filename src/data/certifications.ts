@@ -11,7 +11,7 @@ export const certifications: Certification[] = [
   },
   {
     name: 'Machine Learning',
-    issuer: 'DeepLearning.AI · Stanford University',
+    issuer: 'DeepLearning.AI and Stanford University',
     icon: Brain,
   },
   {
@@ -22,7 +22,7 @@ export const certifications: Certification[] = [
   },
   {
     name: 'KAUST-NCA Cybersecurity Training',
-    issuer: 'KAUST · National Cybersecurity Authority',
+    issuer: 'KAUST and the National Cybersecurity Authority',
     detail: '40-hour intensive program',
     date: 'February 2025',
     icon: Lock,

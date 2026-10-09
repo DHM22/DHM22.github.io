@@ -13,6 +13,10 @@ export interface Profile {
   role: string;
   focus: string[];
   intro: string;
+  /** Hero line under the name. Keep it under 20 words. */
+  headline: string;
+  /** Hero photo, a file in /public */
+  portrait: ImageAsset & { focus?: string };
   location: string;
   availability: string;
   email: string;
@@ -22,12 +26,6 @@ export interface Profile {
   cv: string;
   /** Optional form service URL (Formspree, Web3Forms, …). Empty: the form opens the visitor's email app. */
   contactFormEndpoint: string;
-}
-
-export interface Highlight {
-  icon: IconType;
-  title: string;
-  detail: string;
 }
 
 export interface Education {
@@ -88,9 +86,9 @@ export interface Project {
   tech: string[];
   badge?: { label: string; icon: IconType; tone?: 'accent' | 'gold' };
   metrics?: { value: string; label: string }[];
-  /** A screenshot; projects without one get generated artwork */
+  /** A screenshot. Projects without one show the diagram in `artwork`, or no media at all. */
   image?: ImageAsset;
-  artwork?: 'dashboard' | 'fund';
+  artwork?: 'fund';
   github?: string;
   demo?: string;
   /** What I did on the project */

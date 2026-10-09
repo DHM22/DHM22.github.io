@@ -95,6 +95,5 @@ export const projects: Project[] = [
     description:
       'Web-based dashboard for virtual machine management, IP allocation, utilization monitoring, lifecycle management, alerts, and audit logging.',
     tech: ['JavaScript', 'Networking', 'Virtualization', 'UI/UX'],
-    artwork: 'dashboard',
   },
 ];

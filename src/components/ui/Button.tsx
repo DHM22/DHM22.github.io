@@ -11,20 +11,18 @@ interface StyleProps {
 }
 
 const base =
-  'inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-xl font-medium transition-[background-color,border-color,color,translate] duration-200 disabled:pointer-events-none disabled:opacity-60';
+  'inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium transition-[background-color,border-color,color,scale,filter] duration-200 ease-out active:scale-[0.98] disabled:pointer-events-none disabled:opacity-60';
 
 const variants: Record<Variant, string> = {
-  primary:
-    'bg-linear-to-b from-[#7f98ff] to-accent text-white shadow-[0_10px_30px_-12px_rgb(110_139_255_/_0.7),inset_0_1px_0_rgb(255_255_255_/_0.22)] hover:from-[#90a6ff] hover:to-[#7b95ff] active:translate-y-px',
-  secondary:
-    'border border-line-strong bg-white/[0.03] text-fg hover:border-white/25 hover:bg-white/[0.07] active:translate-y-px',
-  ghost: 'text-fg-2 hover:bg-white/[0.06] hover:text-fg',
+  primary: 'bg-accent text-on-accent hover:brightness-110',
+  secondary: 'border border-line-strong text-fg hover:border-fg-3 hover:bg-fg/[0.04]',
+  ghost: 'text-fg-2 hover:bg-fg/[0.06] hover:text-fg',
 };
 
 const sizes: Record<Size, string> = {
-  sm: 'h-9 px-3.5 text-sm',
-  compact: 'h-11 px-4 text-sm sm:h-9 sm:px-3.5',
-  md: 'h-12 px-5 text-[15px]',
+  sm: 'h-9 px-4 text-sm',
+  compact: 'h-11 px-4 text-sm sm:h-9',
+  md: 'h-12 px-6 text-[15px]',
 };
 
 function buttonClass({ variant = 'primary', size = 'md' }: StyleProps, className?: string) {

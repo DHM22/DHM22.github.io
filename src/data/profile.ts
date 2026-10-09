@@ -6,6 +6,14 @@ export const profile: Profile = {
   focus: ['AI & Deep Learning', 'Software Engineering', 'Data Analytics'],
   intro:
     'Computer Science graduate passionate about building intelligent solutions through AI, software engineering, and data.',
+  headline: 'I build AI systems, software and data tools. Two first-place hackathon wins in 2026.',
+  portrait: {
+    src: 'images/awards/venturex-2026/venturex-win.webp',
+    alt: 'Abdurahman holding the VentureX first-place board',
+    width: 1200,
+    height: 2133,
+    focus: '50% 42%',
+  },
   location: 'Eastern Province, Saudi Arabia',
   availability: 'Open to opportunities',
   email: 'alduraywish_a@outlook.com',

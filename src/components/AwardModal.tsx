@@ -89,7 +89,7 @@ export function AwardModal({ award, index, onIndexChange, onClose }: AwardModalP
           </button>
 
           <div className="flex h-full flex-col overflow-y-auto lg:flex-row lg:overflow-hidden">
-            <div className="flex shrink-0 flex-col bg-black/35 lg:min-w-0 lg:flex-1">
+            <div className="flex shrink-0 flex-col bg-surface-2 lg:min-w-0 lg:flex-1">
               <div
                 className="relative h-[46svh] lg:h-auto lg:flex-1"
                 onTouchStart={(event) => (touchStartX.current = event.touches[0].clientX)}
@@ -105,7 +105,7 @@ export function AwardModal({ award, index, onIndexChange, onClose }: AwardModalP
                   key={photo.src}
                   src={asset(photo.src)}
                   alt={photo.alt}
-                  className="fade-in absolute inset-0 m-auto max-h-[calc(100%-2rem)] max-w-[calc(100%-2rem)] rounded-lg object-contain shadow-2xl shadow-black/60 lg:max-h-[calc(100%-4rem)] lg:max-w-[calc(100%-6rem)]"
+                  className="fade-in absolute inset-0 m-auto max-h-[calc(100%-2rem)] max-w-[calc(100%-2rem)] rounded-lg object-contain lg:max-h-[calc(100%-4rem)] lg:max-w-[calc(100%-6rem)]"
                 />
                 {count > 1 && (
                   <>
@@ -132,7 +132,7 @@ export function AwardModal({ award, index, onIndexChange, onClose }: AwardModalP
                         aria-label={`Show photo ${i + 1}: ${item.caption ?? item.alt}`}
                         aria-current={i === index ? 'true' : undefined}
                         className={cn(
-                          'block h-14 w-20 overflow-hidden rounded-lg border transition',
+                          'block h-14 w-20 overflow-hidden rounded-md border transition',
                           i === index
                             ? 'border-accent ring-2 ring-accent/30'
                             : 'border-line opacity-55 hover:opacity-100',
@@ -147,7 +147,7 @@ export function AwardModal({ award, index, onIndexChange, onClose }: AwardModalP
             </div>
 
             <aside className="shrink-0 border-t border-line p-6 sm:p-8 lg:w-[25rem] lg:overflow-y-auto lg:border-t-0 lg:border-l">
-              <Badge icon={Trophy} tone="gold">
+              <Badge icon={Trophy}>
                 {award.placement}
               </Badge>
               <h2 id="award-dialog-title" className="mt-4 text-2xl font-semibold tracking-tight">
@@ -180,7 +180,7 @@ export function AwardModal({ award, index, onIndexChange, onClose }: AwardModalP
 
               <div className="mt-8 space-y-7 text-[15px] leading-relaxed">
                 <section>
-                  <h3 className="eyebrow">The project</h3>
+                  <h3 className="label">The project</h3>
                   <p className="mt-2 font-medium text-fg">{award.project}</p>
                   {award.description.map((paragraph) => (
                     <p key={paragraph} className="mt-2 text-pretty text-fg-2">
@@ -190,20 +190,20 @@ export function AwardModal({ award, index, onIndexChange, onClose }: AwardModalP
                 </section>
 
                 <section>
-                  <h3 className="eyebrow">Achievement</h3>
+                  <h3 className="label">Achievement</h3>
                   <p className="mt-2 text-pretty text-fg-2">{award.achievement}</p>
                 </section>
 
                 {award.role && (
                   <section>
-                    <h3 className="eyebrow">My role</h3>
+                    <h3 className="label">My role</h3>
                     <p className="mt-2 text-pretty text-fg-2">{award.role}</p>
                   </section>
                 )}
 
                 {!award.team && award.teamSize && (
                   <section>
-                    <h3 className="eyebrow">Team</h3>
+                    <h3 className="label">Team</h3>
                     <p className="mt-2 flex flex-wrap items-center gap-3 text-fg-2">
                       Team of {award.teamSize}
                       <Pending>teammates' names</Pending>
@@ -213,7 +213,7 @@ export function AwardModal({ award, index, onIndexChange, onClose }: AwardModalP
 
                 {award.team && (
                   <section>
-                    <h3 className="eyebrow">Team</h3>
+                    <h3 className="label">Team</h3>
                     <ul className="mt-3 space-y-2.5">
                       {award.team.map((member) => (
                         <li key={member.name} className="flex items-baseline justify-between gap-4 text-sm">

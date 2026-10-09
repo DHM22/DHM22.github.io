@@ -1,4 +1,4 @@
-import { ExternalLink } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import type { Project } from '../types';
 import { asset, cn, externalLinkProps } from '../lib/utils';
 import { ProjectArtwork } from './ProjectArtwork';
@@ -8,96 +8,33 @@ import { Pending } from './ui/Pending';
 import { Reveal } from './ui/Reveal';
 import { Badge, TagList } from './ui/Tag';
 
-interface ProjectCardProps {
-  project: Project;
-  /** Featured: image and text side by side on large screens */
-  featured?: boolean;
-  /** Put the image on the right (featured cards alternate) */
-  flip?: boolean;
-  delay?: number;
-}
-
-export function ProjectCard({ project, featured = false, flip = false, delay = 0 }: ProjectCardProps) {
+/** The first featured project: a wide image, then the story beside the numbers. */
+export function LeadProject({ project }: { project: Project }) {
   return (
-    <Reveal delay={delay} className="h-full">
-      <article
-        id={`project-${project.id}`}
-        className={cn(
-          'group relative flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-surface/80 transition-colors duration-300 hover:border-line-strong',
-          featured && 'lg:grid lg:grid-cols-12',
-        )}
-      >
-        <div
-          className={cn(
-            'relative aspect-[16/10] overflow-hidden border-b border-line',
-            featured && 'lg:col-span-7 lg:aspect-auto lg:min-h-[26rem] lg:border-b-0',
-            featured && (flip ? 'lg:order-2 lg:border-l' : 'lg:border-r'),
-          )}
-        >
-          <ProjectMedia project={project} featured={featured} />
-        </div>
+    <Reveal>
+      <article id={`project-${project.id}`} className="group">
+        <Media project={project} className="aspect-[16/10] sm:aspect-[16/9]" eager />
 
-        <div className={cn('flex flex-1 flex-col p-6 sm:p-8', featured && 'lg:col-span-5')}>
-          {project.badge && (
-            <div className="mb-5">
-              <Badge icon={project.badge.icon} tone={project.badge.tone}>
-                {project.badge.label}
-              </Badge>
-            </div>
-          )}
-          <h3 className="text-2xl font-semibold tracking-tight">
-            {project.name}
-            {project.subtitle && <span className="mt-1 block text-base font-normal text-fg-2">{project.subtitle}</span>}
-          </h3>
-          <p className="mt-4 leading-relaxed text-pretty text-fg-2">{project.description}</p>
-          {project.role && (
-            <p className="mt-3 text-sm leading-relaxed text-pretty text-fg-3">
-              <span className="font-medium text-fg-2">My role: </span>
-              {project.role}
-            </p>
-          )}
+        <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
+          <div className="lg:col-span-7">
+            <Heading project={project} large />
+            <p className="mt-5 max-w-[62ch] leading-relaxed text-pretty text-fg-2 sm:text-lg">{project.description}</p>
+            <Role project={project} />
+            <Links project={project} className="mt-7" />
+          </div>
 
-          {project.metrics && (
-            <dl className="mt-6 grid grid-cols-3 gap-px overflow-hidden rounded-xl border border-line bg-line">
-              {project.metrics.map((metric) => (
-                <div key={metric.label} className="flex flex-col-reverse justify-end bg-surface p-3 sm:p-4">
-                  <dt className="mt-1 text-xs leading-snug text-fg-3">{metric.label}</dt>
-                  <dd className="text-lg font-semibold tracking-tight tabular-nums sm:text-xl">{metric.value}</dd>
-                </div>
-              ))}
-            </dl>
-          )}
-
-          <TagList items={project.tech} label="Technologies" className="mt-6" />
-
-          <div className="mt-auto flex flex-wrap items-center gap-3 pt-7">
-            {project.github ? (
-              <ButtonLink
-                href={project.github}
-                {...externalLinkProps}
-                variant="secondary"
-                size="compact"
-                aria-label={`${project.name} on GitHub`}
-              >
-                <GitHubIcon className="size-4" />
-                GitHub
-              </ButtonLink>
-            ) : (
-              <Pending>GitHub link</Pending>
+          <div className="lg:col-span-4 lg:col-start-9">
+            {project.metrics && (
+              <dl className="grid grid-cols-3 gap-6 lg:grid-cols-1 lg:gap-7">
+                {project.metrics.map((metric) => (
+                  <div key={metric.label} className="flex flex-col-reverse justify-end">
+                    <dt className="mt-1 text-sm leading-snug text-fg-3">{metric.label}</dt>
+                    <dd className="text-3xl font-semibold tracking-tighter tabular-nums sm:text-4xl">{metric.value}</dd>
+                  </div>
+                ))}
+              </dl>
             )}
-            {project.demo && (
-              <ButtonLink
-                href={project.demo}
-                {...externalLinkProps}
-                variant="ghost"
-                size="compact"
-                aria-label={`${project.name} live demo`}
-              >
-                <ExternalLink className="size-4" aria-hidden />
-                Live Demo
-              </ButtonLink>
-            )}
-            {project.note && <span className="ml-auto font-mono text-xs text-fg-3">{project.note}</span>}
+            <TagList items={project.tech} label="Technologies" className="mt-8" />
           </div>
         </div>
       </article>
@@ -105,48 +42,137 @@ export function ProjectCard({ project, featured = false, flip = false, delay = 0
   );
 }
 
-function ProjectMedia({ project, featured }: { project: Project; featured: boolean }) {
-  const { image, artwork } = project;
+/** Featured projects after the first, shown in pairs. */
+export function ProjectCard({ project, delay = 0 }: { project: Project; delay?: number }) {
+  return (
+    <Reveal delay={delay} className="h-full">
+      <article id={`project-${project.id}`} className="group flex h-full flex-col">
+        <Media project={project} className="aspect-[16/10]" />
+        <div className="mt-7 flex flex-1 flex-col">
+          <Heading project={project} />
+          <p className="mt-4 leading-relaxed text-pretty text-fg-2">{project.description}</p>
+          <Role project={project} />
 
-  // Featured screenshots sit in a frame and peek out from the bottom-right corner
-  if (image && featured) {
-    return (
-      <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_0%_0%,rgb(110_139_255_/_0.2),transparent_60%),radial-gradient(90%_80%_at_100%_100%,rgb(161_139_255_/_0.14),transparent_60%)]">
-        <div aria-hidden className="bg-grid absolute inset-0 opacity-70" />
+          {project.metrics && (
+            <dl className="mt-7 grid grid-cols-3 gap-4">
+              {project.metrics.map((metric) => (
+                <div key={metric.label} className="flex flex-col-reverse justify-end">
+                  <dt className="mt-1 text-xs leading-snug text-fg-3 sm:text-sm">{metric.label}</dt>
+                  <dd className="text-2xl font-semibold tracking-tighter tabular-nums">{metric.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
+
+          <TagList items={project.tech} label="Technologies" className="mt-7" />
+          <Links project={project} className="mt-auto pt-7" />
+        </div>
+      </article>
+    </Reveal>
+  );
+}
+
+/** Smaller projects: a thumbnail (when there is one) beside a short description. */
+export function CompactProject({ project, delay = 0 }: { project: Project; delay?: number }) {
+  return (
+    <Reveal delay={delay} className="h-full">
+      <article id={`project-${project.id}`} className="group flex h-full flex-col gap-5 sm:flex-row">
+        {project.image && <Media project={project} className="aspect-[16/10] sm:aspect-square sm:w-36 sm:shrink-0" />}
+        <div className="flex flex-1 flex-col">
+          {project.badge && <p className="text-sm text-fg-3">{project.badge.label}</p>}
+          <h4 className="mt-1 text-lg font-semibold tracking-tight">{project.name}</h4>
+          <p className="mt-2 text-sm leading-relaxed text-pretty text-fg-2">{project.description}</p>
+          <TagList items={project.tech} label="Technologies" className="mt-4" />
+          <Links project={project} className="mt-auto pt-5" />
+        </div>
+      </article>
+    </Reveal>
+  );
+}
+
+function Heading({ project, large = false }: { project: Project; large?: boolean }) {
+  return (
+    <>
+      {project.badge && <Badge icon={project.badge.icon}>{project.badge.label}</Badge>}
+      <h3 className={cn('mt-3 font-semibold tracking-tight', large ? 'text-3xl sm:text-4xl' : 'text-2xl')}>
+        {project.name}
+      </h3>
+      {project.subtitle && <p className={cn('mt-1 text-fg-2', large && 'text-lg')}>{project.subtitle}</p>}
+    </>
+  );
+}
+
+function Role({ project }: { project: Project }) {
+  if (!project.role && !project.note) return null;
+  return (
+    <p className="mt-4 max-w-[62ch] text-sm leading-relaxed text-pretty text-fg-3">
+      {project.role && (
+        <>
+          <span className="font-medium text-fg-2">My role: </span>
+          {project.role}
+        </>
+      )}
+      {project.note && <span className="block text-fg-3">{project.note}</span>}
+    </p>
+  );
+}
+
+function Links({ project, className }: { project: Project; className?: string }) {
+  return (
+    <div className={cn('flex flex-wrap items-center gap-2', className)}>
+      {project.github ? (
+        <ButtonLink
+          href={project.github}
+          {...externalLinkProps}
+          variant="secondary"
+          size="compact"
+          aria-label={`${project.name} on GitHub`}
+        >
+          <GitHubIcon className="size-4" />
+          GitHub
+        </ButtonLink>
+      ) : (
+        <Pending>GitHub link</Pending>
+      )}
+      {project.demo && (
+        <ButtonLink
+          href={project.demo}
+          {...externalLinkProps}
+          variant="ghost"
+          size="compact"
+          aria-label={`${project.name} live demo`}
+        >
+          Live demo
+          <ArrowUpRight className="size-4" aria-hidden />
+        </ButtonLink>
+      )}
+    </div>
+  );
+}
+
+function Media({ project, className, eager = false }: { project: Project; className?: string; eager?: boolean }) {
+  const { image, artwork } = project;
+  if (!image && !artwork) return null;
+
+  return (
+    <div className={cn('relative overflow-hidden rounded-xl border border-line bg-surface-2', className)}>
+      {image ? (
         <img
           src={asset(image.src)}
           alt={image.alt}
           width={image.width}
           height={image.height}
-          loading="lazy"
+          loading={eager ? 'eager' : 'lazy'}
           decoding="async"
-          className="absolute top-8 left-8 size-[calc(100%-2rem)] rounded-tl-xl border-t border-l border-white/15 object-cover object-left-top shadow-2xl shadow-black/60 transition-[translate] duration-700 ease-out group-hover:-translate-x-1.5 group-hover:-translate-y-1.5 sm:top-10 sm:left-10 sm:size-[calc(100%-2.5rem)]"
+          className="size-full object-cover object-top transition-transform duration-700 ease-[var(--ease-soft)] group-hover:scale-[1.025]"
         />
-      </div>
-    );
-  }
-
-  if (image) {
-    return (
-      <img
-        src={asset(image.src)}
-        alt={image.alt}
-        width={image.width}
-        height={image.height}
-        loading="lazy"
-        decoding="async"
-        className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-      />
-    );
-  }
-
-  if (artwork) {
-    return (
-      <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-[1.03]">
-        <ProjectArtwork variant={artwork} />
-      </div>
-    );
-  }
-
-  return null;
+      ) : (
+        artwork && (
+          <div className="absolute inset-0 transition-transform duration-700 ease-[var(--ease-soft)] group-hover:scale-[1.025]">
+            <ProjectArtwork variant={artwork} />
+          </div>
+        )
+      )}
+    </div>
+  );
 }

@@ -27,37 +27,39 @@ const methods: { label: string; value: string; href: string; icon: IconType; ext
 ];
 
 export function Contact() {
+  const [email, ...profiles] = methods;
+
   return (
     <Section
       id="contact"
-      index="08"
-      eyebrow="Contact"
-      title="Let's Connect"
-      description="Interested in working together, discussing technology, AI, or software engineering? Feel free to reach out."
+      title="Get in touch"
+      description="Hiring for a role in AI, software engineering or data, or want to talk through a project? I'd like to hear about it."
     >
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-        <Reveal className="space-y-3 lg:col-span-5">
-          <div className="flex items-center gap-3 rounded-2xl border border-ok/20 bg-ok/[0.06] px-5 py-4">
-            <span className="relative flex size-2.5">
-              <span className="pulse-ring absolute inline-flex size-full rounded-full bg-ok/60" />
-              <span className="relative inline-flex size-2.5 rounded-full bg-ok" />
-            </span>
-            <span className="font-medium text-fg">{profile.availability}</span>
-          </div>
+      <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-10">
+        <Reveal className="lg:col-span-5">
+          <p className="label">{email.label}</p>
+          <a
+            href={email.href}
+            className="group mt-2 inline-flex items-center gap-2 text-2xl font-semibold tracking-tight break-all text-fg transition-colors hover:text-accent-fg sm:text-3xl"
+          >
+            {email.value}
+            <ArrowUpRight
+              className="size-6 shrink-0 text-accent-fg transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              aria-hidden
+            />
+          </a>
 
-          <ul className="space-y-3">
-            {methods.map(({ label, value, href, icon: Icon, external }) => (
+          <ul className="mt-10 divide-y divide-line border-y border-line">
+            {profiles.map(({ label, value, href, icon: Icon, external }) => (
               <li key={label}>
                 <a
                   href={href}
                   {...(external ? externalLinkProps : {})}
-                  className="group flex items-center gap-4 rounded-2xl border border-line bg-surface/70 p-4 transition-colors hover:border-line-strong hover:bg-surface-2"
+                  className="group flex items-center gap-4 py-4 transition-colors"
                 >
-                  <span className="grid size-11 shrink-0 place-items-center rounded-xl border border-line bg-surface-2 text-fg-2 transition-colors group-hover:text-fg">
-                    <Icon className="size-[18px]" aria-hidden />
-                  </span>
+                  <Icon className="size-[18px] shrink-0 text-fg-3 transition-colors group-hover:text-fg" aria-hidden />
                   <span className="min-w-0 flex-1">
-                    <span className="block text-xs text-fg-3">{label}</span>
+                    <span className="block text-sm text-fg-3">{label}</span>
                     <span className="block truncate text-fg">{value}</span>
                   </span>
                   <ArrowUpRight
@@ -69,13 +71,13 @@ export function Contact() {
             ))}
           </ul>
 
-          <p className="flex items-center gap-2 px-1 pt-2 text-sm text-fg-3">
+          <p className="mt-6 flex items-center gap-2 text-sm text-fg-3">
             <MapPin className="size-4" aria-hidden />
             {profile.location}
           </p>
         </Reveal>
 
-        <Reveal delay={80} className="lg:col-span-7">
+        <Reveal delay={100} className="lg:col-span-6 lg:col-start-7">
           <ContactForm />
         </Reveal>
       </div>
@@ -92,11 +94,11 @@ const statusMessage: Record<Exclude<Status, 'idle' | 'sending'>, { text: string;
     icon: CircleCheck,
     tone: 'text-fg-2',
   },
-  error: { text: 'Something went wrong while sending. Please email me directly instead.', icon: CircleAlert, tone: 'text-amber-300' },
+  error: { text: 'Something went wrong while sending. Please email me directly instead.', icon: CircleAlert, tone: 'text-accent-fg' },
 };
 
 const fieldClass =
-  'w-full rounded-xl border border-line bg-bg/60 px-4 text-base text-fg placeholder:text-fg-3 transition-[border-color,box-shadow] outline-none focus:border-accent/60 focus:ring-4 focus:ring-accent/15';
+  'w-full rounded-lg border border-line-strong bg-bg px-4 text-base text-fg placeholder:text-fg-3 transition-[border-color,box-shadow] outline-none focus:border-accent focus:ring-4 focus:ring-accent/20';
 
 function ContactForm() {
   const [status, setStatus] = useState<Status>('idle');
@@ -138,7 +140,7 @@ function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="border-gradient rounded-3xl p-6 sm:p-8"
+      className="rounded-xl border border-line bg-surface p-6 sm:p-8"
       aria-describedby={result ? 'contact-status' : undefined}
     >
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -183,7 +185,7 @@ function ContactForm() {
           ) : (
             <Send className="size-4" aria-hidden />
           )}
-          {status === 'sending' ? 'Sending…' : 'Send Message'}
+          {status === 'sending' ? 'Sending' : 'Send message'}
         </Button>
       </div>
     </form>
@@ -203,7 +205,7 @@ function Field({
 }) {
   return (
     <div className={className}>
-      <label htmlFor={htmlFor} className="mb-2 block text-sm font-medium text-fg-2">
+      <label htmlFor={htmlFor} className="mb-2 block text-sm font-medium text-fg">
         {label}
       </label>
       {children}

@@ -1,14 +1,20 @@
 import { useEffect, useState } from 'react';
 
-/** True once the page has scrolled past `offset` pixels. */
+/** True once the page has scrolled past `offset` pixels. Watches a sentinel instead of every scroll event. */
 export function useScrolled(offset = 8): boolean {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > offset);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const sentinel = document.createElement('div');
+    sentinel.setAttribute('aria-hidden', 'true');
+    sentinel.style.cssText = `position:absolute;top:0;left:0;width:1px;height:${offset}px;pointer-events:none`;
+    document.body.prepend(sentinel);
+    const observer = new IntersectionObserver(([entry]) => setScrolled(!entry.isIntersecting));
+    observer.observe(sentinel);
+    return () => {
+      observer.disconnect();
+      sentinel.remove();
+    };
   }, [offset]);
 
   return scrolled;

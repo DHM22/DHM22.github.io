@@ -16,7 +16,7 @@ export const experience: Role[] = [
     id: 'sadara',
     organization: 'Sadara Chemical Company',
     title: 'IT / Manufacturing Operations Management Co-op',
-    period: 'January 2026 – May 2026',
+    period: 'Jan 2026 - May 2026',
     icon: Factory,
     badge: 'Co-op',
     summary:
@@ -64,7 +64,7 @@ export const training: Role[] = [
     id: 'sda-wecloud',
     organization: 'SDA × WeCloudData',
     title: 'Agentic AI Engineering Program (Trainee)',
-    period: 'August 2026 – September 2026',
+    period: 'Aug 2026 - Sep 2026',
     icon: BrainCircuit,
     badge: 'Remote',
     bullets: [

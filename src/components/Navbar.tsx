@@ -44,7 +44,7 @@ export function Navbar() {
         <a href="#top" className="flex items-center gap-3 rounded-lg" aria-label={`${profile.name}, back to top`}>
           <span
             aria-hidden
-            className="grid size-9 place-items-center rounded-xl border border-white/10 bg-linear-to-br from-accent/30 to-accent-2/20 font-mono text-[13px] font-semibold"
+            className="grid size-9 place-items-center rounded-full bg-fg font-mono text-[12px] font-semibold text-bg"
           >
             AD
           </span>
@@ -60,8 +60,8 @@ export function Navbar() {
                   href={`#${item.id}`}
                   aria-current={active === item.id ? 'location' : undefined}
                   className={cn(
-                    'rounded-lg px-3 py-2 text-sm transition-colors',
-                    active === item.id ? 'bg-white/[0.06] text-fg' : 'text-fg-2 hover:text-fg',
+                    'rounded-full px-3 py-2 text-sm transition-colors',
+                    active === item.id ? 'text-fg' : 'text-fg-3 hover:text-fg',
                   )}
                 >
                   {item.label}
@@ -81,7 +81,7 @@ export function Navbar() {
           <button
             ref={toggleRef}
             type="button"
-            className="grid size-11 place-items-center rounded-xl border border-line text-fg transition-colors hover:bg-white/[0.05] lg:hidden"
+            className="grid size-11 place-items-center rounded-full border border-line text-fg transition-colors hover:bg-fg/[0.05] lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? 'Close menu' : 'Open menu'}
@@ -108,8 +108,8 @@ export function Navbar() {
                   onClick={() => setOpen(false)}
                   aria-current={active === item.id ? 'location' : undefined}
                   className={cn(
-                    'flex h-12 items-center rounded-xl px-4 text-base transition-colors',
-                    active === item.id ? 'bg-white/[0.06] text-fg' : 'text-fg-2 hover:bg-white/[0.04] hover:text-fg',
+                    'flex h-12 items-center rounded-full px-4 text-base transition-colors',
+                    active === item.id ? 'bg-fg/[0.06] text-fg' : 'text-fg-2 hover:bg-fg/[0.04] hover:text-fg',
                   )}
                 >
                   {item.label}

@@ -3,7 +3,7 @@ import type { Award } from '../types';
 /**
  * To add photos: put the files in public/images/awards/<award-id>/ and list them in `photos`.
  * The first photo is the card cover. `muted` dims it in the card only; `focus` picks the part of
- * a tall photo that stays in frame. Around 1200–2000 px wide keeps the page fast.
+ * a tall photo that stays in frame. Around 1200-2000 px wide keeps the page fast.
  */
 export const awards: Award[] = [
   {
@@ -19,7 +19,7 @@ export const awards: Award[] = [
     summary:
       'Won the Cloud Computing & Infrastructure track with Harf, a gateway that makes Arabic AI requests 36% cheaper at near-identical answer quality.',
     description: [
-      'LLM providers bill per token, and Arabic text splits into more tokens than English. Our measurements showed the same customer-service conversation costing 18–41% more in Arabic, depending on the model.',
+      'LLM providers bill per token, and Arabic text splits into more tokens than English. Our measurements showed the same customer-service conversation costing 18-41% more in Arabic, depending on the model.',
       "Harf sits between an organization's apps and its LLM providers. It normalizes dialectal Arabic, detects the intent of each request and routes it along the cheapest safe path: an approved answer from memory, a small model, or a large model.",
     ],
     achievement:

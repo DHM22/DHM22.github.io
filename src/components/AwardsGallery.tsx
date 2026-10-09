@@ -9,21 +9,11 @@ export function AwardsGallery() {
   const openAward = open ? (awards.find((award) => award.id === open.awardId) ?? null) : null;
 
   return (
-    <Section
-      id="awards"
-      index="06"
-      eyebrow="Awards"
-      title="Awards & Hackathons"
-      description="Competition results, with photos and the story behind each one."
-    >
-      <ul className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        {awards.map((award, i) => (
-          <li key={award.id}>
-            <AwardCard
-              award={award}
-              delay={(i % 2) * 80}
-              onOpen={(index) => setOpen({ awardId: award.id, index })}
-            />
+    <Section id="awards" title="Awards">
+      <ul className="divide-y divide-line">
+        {awards.map((award) => (
+          <li key={award.id} className="py-12 first:pt-0 last:pb-0">
+            <AwardCard award={award} onOpen={(index) => setOpen({ awardId: award.id, index })} />
           </li>
         ))}
       </ul>

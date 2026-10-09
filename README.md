@@ -27,8 +27,8 @@ All the text lives in `src/data/`. You never need to touch the components to upd
 
 | File                | What it holds                                                  |
 | ------------------- | -------------------------------------------------------------- |
-| `profile.ts`        | Name, intro, email, LinkedIn, GitHub, CV file, nav items       |
-| `about.ts`          | About text and the highlight cards                             |
+| `profile.ts`        | Name, hero line and photo, email, links, CV file, nav items    |
+| `about.ts`          | About text and the quick facts beside it                       |
 | `education.ts`      | Degree, GPA, honors, relevant areas                            |
 | `experience.ts`     | Sadara co-op (featured card) and the training program          |
 | `skills.ts`         | Skill groups                                                   |
@@ -48,7 +48,7 @@ Information that's still missing (a GitHub link, a certificate date, award photo
 
 ### Project screenshots
 
-Put the image in `public/images/projects/` and add an `image` to the project in `src/data/projects.ts`. Projects without an image show generated artwork instead.
+Put the image in `public/images/projects/` and add an `image` to the project in `src/data/projects.ts`. Projects without an image show their `artwork` diagram if they have one, or no media at all.
 
 ### CV
 
