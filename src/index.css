@@ -144,10 +144,15 @@
     animation-delay: var(--d, 0ms);
   }
 
-  /* The hero portrait settles from a slight zoom while its frame wipes open */
+  /* The panel rises first, then the portrait settles onto it */
+  .hero-panel {
+    animation: hero-panel 1.1s var(--ease-soft) both;
+    transform-origin: bottom;
+  }
+
   .hero-photo {
-    animation: hero-photo 1.4s var(--ease-soft) both;
-    animation-delay: 120ms;
+    animation: hero-photo 1.2s var(--ease-soft) both;
+    animation-delay: 180ms;
   }
 
   .fade-in {
@@ -197,6 +202,7 @@
     }
 
     .hero-in,
+    .hero-panel,
     .hero-photo,
     .fade-in,
     .lightbox[open],
@@ -213,14 +219,17 @@
   }
 }
 
+@keyframes hero-panel {
+  from {
+    opacity: 0;
+    scale: 1 0.85;
+  }
+}
+
 @keyframes hero-photo {
   from {
     opacity: 0;
-    scale: 1.06;
-    clip-path: inset(8% 0 0 0 round 0.75rem);
-  }
-  to {
-    clip-path: inset(0 0 0 0 round 0.75rem);
+    translate: 0 32px;
   }
 }
 

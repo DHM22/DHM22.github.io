@@ -44,7 +44,9 @@ export function Hero() {
         </div>
 
         <div className="lg:col-span-5">
-          <div className="hero-photo relative mx-auto aspect-[4/3] w-full overflow-hidden rounded-xl bg-surface-2 sm:aspect-[16/10] lg:aspect-auto lg:h-[min(76dvh,680px)]">
+          {/* The portrait stands on a panel and breaks out over its top edge */}
+          <div className="relative mx-auto flex h-[26rem] w-full max-w-md items-end justify-center sm:h-[32rem] lg:h-[min(80dvh,720px)] lg:max-w-none">
+            <div aria-hidden className="hero-panel absolute inset-x-0 bottom-0 h-[74%] rounded-xl bg-surface-2" />
             <img
               src={asset(portrait.src)}
               alt={portrait.alt}
@@ -52,8 +54,7 @@ export function Hero() {
               height={portrait.height}
               fetchPriority="high"
               decoding="async"
-              style={{ objectPosition: portrait.focus }}
-              className="size-full object-cover"
+              className="hero-photo relative h-full w-auto max-w-full object-contain object-bottom"
             />
           </div>
         </div>

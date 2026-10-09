@@ -15,8 +15,8 @@ export interface Profile {
   intro: string;
   /** Hero line under the name. Keep it under 20 words. */
   headline: string;
-  /** Hero photo, a file in /public */
-  portrait: ImageAsset & { focus?: string };
+  /** Hero photo with a transparent background, a file in /public */
+  portrait: ImageAsset;
   location: string;
   availability: string;
   email: string;

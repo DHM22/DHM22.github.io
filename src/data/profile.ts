@@ -7,12 +7,12 @@ export const profile: Profile = {
   intro:
     'Computer Science graduate passionate about building intelligent solutions through AI, software engineering, and data.',
   headline: 'I build AI systems, software and data tools. Two first-place hackathon wins in 2026.',
+  // Background removed, so it sits on the page's own colors in light and dark mode
   portrait: {
-    src: 'images/awards/venturex-2026/venturex-win.webp',
-    alt: 'Abdurahman holding the VentureX first-place board',
-    width: 1200,
-    height: 2133,
-    focus: '50% 42%',
+    src: 'images/portrait.webp',
+    alt: 'Portrait of Abdurahman Al-Duraywish, arms crossed, wearing a thobe and red shemagh',
+    width: 682,
+    height: 1066,
   },
   location: 'Eastern Province, Saudi Arabia',
   availability: 'Open to opportunities',
