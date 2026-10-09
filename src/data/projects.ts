@@ -102,5 +102,6 @@ export const projects: Project[] = [
       height: 938,
       focus: 'left top',
     },
+    github: 'https://github.com/DHM22/vm-lab-dashboard',
   },
 ];
