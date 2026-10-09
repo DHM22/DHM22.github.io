@@ -95,5 +95,12 @@ export const projects: Project[] = [
     description:
       'Web-based dashboard for virtual machine management, IP allocation, utilization monitoring, lifecycle management, alerts, and audit logging.',
     tech: ['JavaScript', 'Networking', 'Virtualization', 'UI/UX'],
+    image: {
+      src: 'images/projects/vm-lab.webp',
+      alt: 'VMLab dashboard: 8 VMs with 5 running, per-VM CPU status, cluster resource usage and recent activity',
+      width: 1919,
+      height: 938,
+      focus: 'left top',
+    },
   },
 ];

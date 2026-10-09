@@ -72,12 +72,12 @@ export function ProjectCard({ project, delay = 0 }: { project: Project; delay?: 
   );
 }
 
-/** Smaller projects: a thumbnail (when there is one) beside a short description. */
+/** Smaller projects: the image (when there is one) above a short description. */
 export function CompactProject({ project, delay = 0 }: { project: Project; delay?: number }) {
   return (
     <Reveal delay={delay} className="h-full">
-      <article id={`project-${project.id}`} className="group flex h-full flex-col gap-5 sm:flex-row">
-        {project.image && <Media project={project} className="aspect-[16/10] sm:aspect-square sm:w-36 sm:shrink-0" />}
+      <article id={`project-${project.id}`} className="group flex h-full flex-col gap-5">
+        {project.image && <Media project={project} className="aspect-[16/9]" />}
         <div className="flex flex-1 flex-col">
           {project.badge && <p className="text-sm text-fg-3">{project.badge.label}</p>}
           <h4 className="mt-1 text-lg font-semibold tracking-tight">{project.name}</h4>
@@ -164,6 +164,7 @@ function Media({ project, className, eager = false }: { project: Project; classN
           height={image.height}
           loading={eager ? 'eager' : 'lazy'}
           decoding="async"
+          style={{ objectPosition: image.focus }}
           className="size-full object-cover object-top transition-transform duration-700 ease-[var(--ease-soft)] group-hover:scale-[1.025]"
         />
       ) : (

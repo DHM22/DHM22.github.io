@@ -76,6 +76,8 @@ export interface ImageAsset {
   alt: string;
   width: number;
   height: number;
+  /** CSS object-position for cropped previews, e.g. 'left top' to keep a logo in frame */
+  focus?: string;
 }
 
 export interface Project {
@@ -100,8 +102,6 @@ export interface Project {
 
 export interface Photo extends ImageAsset {
   caption?: string;
-  /** CSS object-position for cropped previews, e.g. '50% 60%' to keep a face and a sign in frame */
-  focus?: string;
   /** Dims the photo in the award card so it sits with the dark design. The viewer shows it at full clarity. */
   muted?: boolean;
 }
