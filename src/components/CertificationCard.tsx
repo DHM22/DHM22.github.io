@@ -5,7 +5,7 @@ import { Pending } from './ui/Pending';
 import { Reveal } from './ui/Reveal';
 
 export function CertificationCard({ certification, delay = 0 }: { certification: Certification; delay?: number }) {
-  const { name, issuer, detail, date, url } = certification;
+  const { name, issuer, detail, date, credentialId, url } = certification;
 
   return (
     <Reveal delay={delay}>
@@ -15,6 +15,7 @@ export function CertificationCard({ certification, delay = 0 }: { certification:
         {detail && <p className="mt-0.5 text-sm text-fg-3">{detail}</p>}
         <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
           {date ? <span className="font-mono text-fg-3">{date}</span> : <Pending>date</Pending>}
+          {credentialId && <span className="font-mono text-fg-3">ID {credentialId}</span>}
           {url ? (
             <a
               href={url}

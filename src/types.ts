@@ -142,5 +142,7 @@ export interface Certification {
   icon: IconType;
   date?: string;
   detail?: string;
+  /** Shown so the credential can be verified even without a link */
+  credentialId?: string;
   url?: string;
 }
