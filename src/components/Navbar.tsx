@@ -4,6 +4,7 @@ import { navItems, profile } from '../data/profile';
 import { useActiveSection, useScrolled } from '../lib/hooks';
 import { asset, cn } from '../lib/utils';
 import { ButtonLink } from './ui/Button';
+import { ThemeToggle } from './ui/ThemeToggle';
 
 const sectionIds = navItems.map((item) => item.id);
 const cvFileName = profile.cv.split('/').pop();
@@ -72,6 +73,7 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <ThemeToggle className="size-11 lg:size-9" />
           <div className="hidden lg:block">
             <ButtonLink href={asset(profile.cv)} download={cvFileName} variant="secondary" size="sm">
               <Download className="size-4" aria-hidden />

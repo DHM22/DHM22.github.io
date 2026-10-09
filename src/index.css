@@ -2,7 +2,7 @@
 
 /*
  * Design tokens: every utility like bg-surface, text-fg-2 or border-line comes from here.
- * Palette: zinc neutrals plus one accent (signal orange), dark and light from the system setting.
+ * Palette: zinc neutrals plus one accent (signal orange). Dark by default, light below.
  * Shapes: interactive elements (buttons, chips) are pills; media and panels use rounded-xl (12px).
  */
 @theme {
@@ -28,8 +28,31 @@
 }
 
 @layer base {
+  /*
+   * Light theme. The system setting decides until the visitor picks one with the theme switch,
+   * which sets data-theme on <html> (see ThemeToggle and the inline script in index.html).
+   * The two blocks hold the same values: keep them in sync.
+   */
+  :root[data-theme='light'] {
+    --color-bg: #f4f4f5;
+    --color-surface: #fafafa;
+    --color-surface-2: #ececee;
+    --color-line: rgb(24 24 27 / 0.1);
+    --color-line-strong: rgb(24 24 27 / 0.2);
+
+    --color-fg: #18181b;
+    --color-fg-2: #4b4b53;
+    --color-fg-3: #66666f;
+
+    --color-accent: #c2410c;
+    --color-accent-fg: #b13c0b;
+    --color-on-accent: #fff7f2;
+    --color-ok: #15803d;
+    color-scheme: light;
+  }
+
   @media (prefers-color-scheme: light) {
-    :root {
+    :root:not([data-theme='dark']) {
       --color-bg: #f4f4f5;
       --color-surface: #fafafa;
       --color-surface-2: #ececee;
@@ -44,7 +67,12 @@
       --color-accent-fg: #b13c0b;
       --color-on-accent: #fff7f2;
       --color-ok: #15803d;
+      color-scheme: light;
     }
+  }
+
+  :root[data-theme='dark'] {
+    color-scheme: dark;
   }
 
   html {
@@ -210,6 +238,13 @@
       animation: none;
     }
   }
+}
+
+/* Theme switch: ThemeToggle animates the new snapshot's clip-path, so the defaults are turned off */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
 @keyframes hero-in {

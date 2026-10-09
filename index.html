@@ -12,6 +12,13 @@
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0c0c0e" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f4f5" />
     <meta name="color-scheme" content="dark light" />
+    <!-- Apply a theme the visitor picked before, before first paint (see ThemeToggle) -->
+    <script>
+      try {
+        var theme = localStorage.getItem('theme');
+        if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+      } catch (e) {}
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Social previews. VITE_SITE_URL is set in .env -->

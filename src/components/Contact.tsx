@@ -5,6 +5,7 @@ import { cn, externalLinkProps } from '../lib/utils';
 import type { IconType } from '../types';
 import { GitHubIcon, LinkedInIcon } from './ui/BrandIcons';
 import { Button } from './ui/Button';
+import { CopyButton } from './ui/CopyButton';
 import { Reveal } from './ui/Reveal';
 import { Section } from './ui/Section';
 
@@ -48,6 +49,7 @@ export function Contact() {
               aria-hidden
             />
           </a>
+          <CopyButton value={profile.email} label="Copy email" className="mt-4 flex w-fit" />
 
           <ul className="mt-10 divide-y divide-line border-y border-line">
             {profiles.map(({ label, value, href, icon: Icon, external }) => (
