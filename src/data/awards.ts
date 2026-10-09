@@ -66,6 +66,14 @@ export const awards: Award[] = [
     teamSize: 3,
     photos: [
       {
+        src: 'images/awards/sakanthon-2026/sakanthon-ceremony.webp',
+        alt: 'The Sakanthon winning team on stage with the organizers, holding the SAR 35,000 first-place board',
+        caption: 'On stage after winning 1st place in the Financial Solutions track',
+        width: 1080,
+        height: 1440,
+        focus: '50% 56%',
+      },
+      {
         src: 'images/awards/sakanthon-2026/sakanthon-win.webp',
         alt: 'Abdurahman holding the Sakanthon first-place trophy and board',
         caption: 'Receiving 1st place in the Financial Solutions track',

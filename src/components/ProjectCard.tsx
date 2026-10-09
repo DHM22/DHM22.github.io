@@ -4,7 +4,6 @@ import { asset, cn, externalLinkProps } from '../lib/utils';
 import { ProjectArtwork } from './ProjectArtwork';
 import { GitHubIcon } from './ui/BrandIcons';
 import { ButtonLink } from './ui/Button';
-import { Pending } from './ui/Pending';
 import { Reveal } from './ui/Reveal';
 import { Badge, TagList } from './ui/Tag';
 
@@ -118,9 +117,10 @@ function Role({ project }: { project: Project }) {
 }
 
 function Links({ project, className }: { project: Project; className?: string }) {
+  if (!project.github && !project.demo) return null;
   return (
     <div className={cn('flex flex-wrap items-center gap-2', className)}>
-      {project.github ? (
+      {project.github && (
         <ButtonLink
           href={project.github}
           {...externalLinkProps}
@@ -131,8 +131,6 @@ function Links({ project, className }: { project: Project; className?: string })
           <GitHubIcon className="size-4" />
           GitHub
         </ButtonLink>
-      ) : (
-        <Pending>GitHub link</Pending>
       )}
       {project.demo && (
         <ButtonLink
