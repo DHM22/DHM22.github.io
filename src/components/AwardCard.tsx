@@ -1,6 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import type { Award } from '../types';
-import { asset } from '../lib/utils';
+import { asset, cn } from '../lib/utils';
 import { Reveal } from './ui/Reveal';
 
 interface AwardCardProps {
@@ -15,6 +15,8 @@ export function AwardCard({ award, onOpen, delay = 0 }: AwardCardProps) {
   const [cover] = award.photos;
   const total = award.photos.length;
   const [rank, ...placeWords] = award.placement.split(' ');
+  // Wide photos get a wider 4:3 slot so nobody at the edges is cropped out
+  const landscape = cover && cover.width > cover.height;
 
   return (
     <Reveal delay={delay}>
@@ -24,7 +26,7 @@ export function AwardCard({ award, onOpen, delay = 0 }: AwardCardProps) {
           <span className="block text-sm text-fg-3 md:mt-1">{placeWords.join(' ')}</span>
         </p>
 
-        <div className="md:col-span-6">
+        <div className={landscape ? 'md:col-span-5' : 'md:col-span-6'}>
           <h3 className="text-2xl font-semibold tracking-tight sm:text-3xl">
             <span className="sr-only">{award.placement}, </span>
             {award.event} <span className="font-normal text-fg-3">{award.year}</span>
@@ -53,7 +55,10 @@ export function AwardCard({ award, onOpen, delay = 0 }: AwardCardProps) {
             type="button"
             onClick={() => onOpen(0)}
             aria-label={`Open photos: ${award.event} ${award.year}`}
-            className="relative aspect-[4/3] cursor-zoom-in overflow-hidden rounded-xl bg-surface-2 md:col-span-4 md:aspect-[4/5]"
+            className={cn(
+              'relative aspect-[4/3] cursor-zoom-in overflow-hidden rounded-xl bg-surface-2',
+              landscape ? 'md:col-span-5' : 'md:col-span-4 md:aspect-[4/5]',
+            )}
           >
             <img
               src={asset(cover.src)}

@@ -35,6 +35,13 @@ export const awards: Award[] = [
     ],
     photos: [
       {
+        src: 'images/awards/venturex-2026/venturex-ceremony.webp',
+        alt: 'The Harf team and the hosts on stage, holding the VentureX first-place board in front of the screen showing the project',
+        caption: 'The Harf team receiving 1st place in the Cloud Computing & Infrastructure track',
+        width: 1240,
+        height: 930,
+      },
+      {
         src: 'images/awards/venturex-2026/venturex-win.webp',
         alt: 'Abdurahman holding the VentureX first-place board, dated 3 October 2026',
         caption: 'Receiving 1st place, 3 October 2026',
